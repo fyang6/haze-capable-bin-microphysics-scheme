@@ -1,0 +1,148 @@
+&SGS_TKE
+
+ dosmagor = .true.
+
+/
+
+&PARAMETERS
+
+ caseid ='pi_chamber_simulation_19K_lcm',
+
+ nrestart = 0,
+
+ LES     = .true.,
+ LAND    = .true.,
+ OCEAN   = .false.,
+ CNS_FLX = .false.,
+
+ doconstdz      = .true.,
+ dosgs	        	= .true.,
+ dodamping 	    = .false.,
+ doupperbound  	= .false.,
+ docloud 	      = .true.,
+ doprecip 	     = .true.,
+ dolongwave	    = .false.,
+ doradsimple    = .false.,
+ doshortwave	   = .false.,
+ dowallx        = .true.,
+ dowally        = .true.,
+ dowallsflux    = .true.,
+ dowallmflux    = .true.,
+ dosurface 	    = .true.,
+ dolargescale 	 = .false.,
+ doradforcing   = .false.,
+ dosfcforcing   = .false.,
+ docoriolis 	   = .false.,
+ dofplane       = .true.,
+ donudging_uv   = .false.,
+ donudging_tq   = .false.,
+
+ SFC_FLX_FXD    = .false.,
+ SFC_TAU_FXD    = .false.,
+
+ ndet_rtd         = 8,
+ ndet_sonicu      = 2,
+ ndet_sonicv      = 2,
+ ndet_sonicw      = 2,
+ ndet_licor       = 2,
+ ndet_thermistors = 8,
+ ndet_virtual     = 0,
+
+ pdet = 10,
+ idet = 5,
+
+ dx = 	0.03125,
+ dy = 	0.03125,
+ dz =  0.03125,
+ dt =  0.02,
+
+ tabs_s = 299.0,
+ tabs_w = 285.0,
+ tabs_t = 280.0,
+
+ day0 = 0.5,
+ nrad = 45,
+ doisccp = .false.,
+ domodis = .false.,
+ domisr = .false.,
+
+ nstop 	= 180000,
+ nstat 	= 3000,
+ nprint = 3000,
+ !nstop = 15000,
+ !nstat = 250,
+ !nprint = 250,
+ nstatfrq= 1,
+
+ doSAMconditionals = .false.
+ dosatupdnconditionals = .false.
+
+ nsave2D	= 90000,
+ nsave2Dstart	= 99999999,
+ nsave2Dend	= 99999999,
+ save2Dbin      = .true.
+
+ nsave3D	= 15000,
+ nsave3Dstart	= 90000,
+ nsave3Dend	= 360000,
+ !nsave3D	= 250,
+ !nsave3Dstart	= 1,
+ !nsave3Dend	= 15000,
+ save3Dbin      = .true.
+
+/
+
+&MICRO_LAGRANGE
+ np_xy = 0 ! particles per grid box
+ nzl   = 32 ! Highest grid level for placing particles
+
+ nstep_LCM_init  = 1 ! start LCM at a prescribed time step
+ n_uvw_iteration = 1 ! number of iteration to find velocity at t=t+1/2.
+
+ dosgsvelocities = .FALSE.   ! SGS velocity fluctuations
+ dosgsmodel      = .FALSE.    ! SGS mixing model
+
+ dosedimentation     = .TRUE.  ! sedimentation
+ sedimentation_start = 1       ! # of timesteps to initiate sedimentation after model starts
+
+ docollection     = .FALSE. ! collection growth
+ collection_start = 1       ! # of timesteps to initiate collection after model starts
+ coll_kernel      = 'hall'  ! collision kernel (hall, wang, or long)
+ r_separate       = 25.0E-6 ! separate between cloud and rain droplets at the stated radius
+
+ doanalytical    = .FALSE.  ! use Euler method for solving diffusion equation
+ doradiation     = .FALSE.  ! radiation effects
+
+ n_aero          = 30.0E6  ! prescribe number concentration of cloud droplets/aerosols
+ rm_aero         = 0.08E-6  ! Geometric mean radius of aerosol size distribution (m)
+ sigma_aero      = 1.4      ! Geometric stddev of aerosol size distribution (unitless)
+
+ init_aero       = 'random' ! mode to initialize aerosols (bin, USM, or random)
+
+ switch_particle_source = .TRUE.
+ n_start_source = 1
+ switch_koehler_micro = .FALSE.
+
+ nz_b_source = 1
+ nz_t_source = 32
+ ny_s_source = 1
+ ny_n_source = 64
+ nx_w_source = 1
+ nx_e_source = 64
+
+ n_source = 0.25E6
+ r_aero_source = 0.0625E-6
+
+ p_source = 0.005
+
+ switch_steady_pichamber = .FALSE.
+ switch_walls_pichamber            = .TRUE. ! turn on lateral walls of pi chamber
+ switch_reflective_walls_pichamber = .TRUE. ! turn on reflective walls of pi chamber (if false, droplets are absorbed)
+
+ subsidence      = .FALSE. ! consider subsidence? specify strength using parameter divergence
+ divergence      = 0.0 !3.75E-6
+
+ spec_nsave      = 15000      !interval of spectra output
+ spec_nsavestart = 90000       !start output of spectra after spec_nsavestart timesteps
+
+/
